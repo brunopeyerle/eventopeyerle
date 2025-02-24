@@ -5,7 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const addButton = document.getElementById("addButton");
 
     if (addButton) {
-        addButton.addEventListener("click", addParticipant); // Atribui o evento ao botão
+        // Associa a função ao evento de clique
+        addButton.addEventListener("click", addParticipant);
     } else {
         console.error("Botão não encontrado!");
     }
@@ -25,21 +26,27 @@ function addParticipant() {
     const name = nameInput.value.trim();
     const cpf = cpfInput.value.trim();
 
+    // Verifica se os campos estão preenchidos
     if (name === "" || cpf === "") {
         alert("Preencha todos os campos!");
         return;
     }
 
+    // Adiciona o participante à lista e ordena por nome
     participants.push({ name, cpf });
     participants.sort((a, b) => a.name.localeCompare(b.name));
 
+    // Atualiza a tabela
     renderParticipants();
-    nameInput.value = ""; // Limpa o campo de nome
-    cpfInput.value = ""; // Limpa o campo de CPF
+
+    // Limpa os campos após o envio
+    nameInput.value = "";
+    cpfInput.value = "";
 }
 
 function renderParticipants() {
     console.log("Atualizando a lista...");
+
     const list = document.getElementById("participantsList");
 
     if (!list) {
@@ -47,7 +54,7 @@ function renderParticipants() {
         return;
     }
 
-    // Criando a tabela
+    // Criando a tabela de participantes
     let tableHTML = "<h3>Inscritos:</h3>";
     tableHTML += `
         <table border="1">
@@ -60,7 +67,7 @@ function renderParticipants() {
             <tbody>
     `;
 
-    // Adicionando cada participante na tabela
+    // Adicionando cada participante à tabela
     participants.forEach(p => {
         tableHTML += `
             <tr>
@@ -75,5 +82,6 @@ function renderParticipants() {
         </table>
     `;
 
-    list.innerHTML = tableHTML; // Atualiza a lista de participantes
+    // Insere a tabela gerada no HTML
+    list.innerHTML = tableHTML;
 }
