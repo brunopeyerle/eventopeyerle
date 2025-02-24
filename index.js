@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const addButton = document.getElementById("addButton");
 
     if (addButton) {
-        // Associa a função ao evento de clique
         addButton.addEventListener("click", addParticipant);
     } else {
         console.error("Botão não encontrado!");
@@ -62,17 +61,22 @@ function renderParticipants() {
                 <tr>
                     <th>Nome</th>
                     <th>CPF</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
     `;
 
-    // Adicionando cada participante à tabela
-    participants.forEach(p => {
+    // Adicionando cada participante à tabela com botões de editar e excluir
+    participants.forEach((p, index) => {
         tableHTML += `
             <tr>
                 <td>${p.name}</td>
                 <td>${p.cpf}</td>
+                <td>
+                    <button onclick="editParticipant(${index})">Editar</button>
+                    <button onclick="deleteParticipant(${index})">Excluir</button>
+                </td>
             </tr>
         `;
     });
@@ -84,4 +88,29 @@ function renderParticipants() {
 
     // Insere a tabela gerada no HTML
     list.innerHTML = tableHTML;
+}
+
+// Função para editar um participante
+function editParticipant(index) {
+    const nameInput = document.getElementById("name");
+    const cpfInput = document.getElementById("cpf");
+
+    const participant = participants[index];
+    nameInput.value = participant.name;
+    cpfInput.value = participant.cpf;
+
+    // Remove o participante atual da lista para substituí-lo
+    participants.splice(index, 1);
+
+    // Atualiza a tabela
+    renderParticipants();
+}
+
+// Função para excluir um participante
+function deleteParticipant(index) {
+    // Remove o participante da lista
+    participants.splice(index, 1);
+
+    // Atualiza a tabela
+    renderParticipants();
 }
