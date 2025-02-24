@@ -1,11 +1,11 @@
 let participants = [];
 
 document.addEventListener("DOMContentLoaded", function () {
-    // Garante que o script só execute após o carregamento da página
+    // Espera o DOM ser carregado
     const addButton = document.getElementById("addButton");
 
     if (addButton) {
-        addButton.addEventListener("click", addParticipant);
+        addButton.addEventListener("click", addParticipant); // Atribui o evento ao botão
     } else {
         console.error("Botão não encontrado!");
     }
@@ -34,8 +34,8 @@ function addParticipant() {
     participants.sort((a, b) => a.name.localeCompare(b.name));
 
     renderParticipants();
-    nameInput.value = "";
-    cpfInput.value = "";
+    nameInput.value = ""; // Limpa o campo de nome
+    cpfInput.value = ""; // Limpa o campo de CPF
 }
 
 function renderParticipants() {
@@ -75,5 +75,5 @@ function renderParticipants() {
         </table>
     `;
 
-    list.innerHTML = tableHTML;
+    list.innerHTML = tableHTML; // Atualiza a lista de participantes
 }
