@@ -1,21 +1,22 @@
 let participants = [];
 
-// Carregar os participantes do LocalStorage ao iniciar a página
+// 🔄 Carregar os participantes do LocalStorage ao iniciar a página
 document.addEventListener("DOMContentLoaded", function () {
     const storedParticipants = localStorage.getItem("participants");
     if (storedParticipants) {
-        participants = JSON.parse(storedParticipants);
-        renderParticipants();
+        participants = JSON.parse(storedParticipants); // Converte a string de volta para array
     }
+    renderParticipants(); // Renderiza a tabela com os dados salvos
 
     const addButton = document.getElementById("addButton");
     if (addButton) {
         addButton.addEventListener("click", addParticipant);
     } else {
-        console.error("Botão não encontrado!");
+        console.error("Botão de adicionar não encontrado!");
     }
 });
 
+// ➕ Adicionar participante
 function addParticipant() {
     const nameInput = document.getElementById("name");
     const cpfInput = document.getElementById("cpf");
@@ -43,11 +44,17 @@ function addParticipant() {
     cpfInput.value = "";
 }
 
+// 🔄 Renderizar tabela de participantes
 function renderParticipants() {
     const list = document.getElementById("participantsList");
 
     if (!list) {
         console.error("Elemento participantsList não encontrado!");
+        return;
+    }
+
+    if (participants.length === 0) {
+        list.innerHTML = "<p>Nenhum participante inscrito.</p>";
         return;
     }
 
@@ -85,12 +92,12 @@ function renderParticipants() {
     list.innerHTML = tableHTML;
 }
 
-// Função para salvar os participantes no LocalStorage
+// 💾 Salvar participantes no LocalStorage
 function saveParticipants() {
     localStorage.setItem("participants", JSON.stringify(participants));
 }
 
-// Função para editar um participante
+// ✏️ Editar um participante
 function editParticipant(index) {
     const nameInput = document.getElementById("name");
     const cpfInput = document.getElementById("cpf");
@@ -100,13 +107,13 @@ function editParticipant(index) {
     cpfInput.value = participant.cpf;
 
     participants.splice(index, 1);
-    saveParticipants(); // Atualizar o LocalStorage
+    saveParticipants(); // Atualiza o LocalStorage
     renderParticipants();
 }
 
-// Função para excluir um participante
+// ❌ Excluir um participante
 function deleteParticipant(index) {
     participants.splice(index, 1);
-    saveParticipants(); // Atualizar o LocalStorage
+    saveParticipants(); // Atualiza o LocalStorage
     renderParticipants();
 }
