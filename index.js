@@ -1,9 +1,14 @@
 let participants = [];
 
+// Carregar os participantes do LocalStorage ao iniciar a página
 document.addEventListener("DOMContentLoaded", function () {
-    // Espera o DOM ser carregado
-    const addButton = document.getElementById("addButton");
+    const storedParticipants = localStorage.getItem("participants");
+    if (storedParticipants) {
+        participants = JSON.parse(storedParticipants);
+        renderParticipants();
+    }
 
+    const addButton = document.getElementById("addButton");
     if (addButton) {
         addButton.addEventListener("click", addParticipant);
     } else {
@@ -12,8 +17,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function addParticipant() {
-    console.log("Botão foi clicado!"); // Para verificar no console se está funcionando
-
     const nameInput = document.getElementById("name");
     const cpfInput = document.getElementById("cpf");
 
@@ -25,27 +28,22 @@ function addParticipant() {
     const name = nameInput.value.trim();
     const cpf = cpfInput.value.trim();
 
-    // Verifica se os campos estão preenchidos
     if (name === "" || cpf === "") {
         alert("Preencha todos os campos!");
         return;
     }
 
-    // Adiciona o participante à lista e ordena por nome
     participants.push({ name, cpf });
     participants.sort((a, b) => a.name.localeCompare(b.name));
 
-    // Atualiza a tabela
+    saveParticipants(); // Salvar no LocalStorage
     renderParticipants();
 
-    // Limpa os campos após o envio
     nameInput.value = "";
     cpfInput.value = "";
 }
 
 function renderParticipants() {
-    console.log("Atualizando a lista...");
-
     const list = document.getElementById("participantsList");
 
     if (!list) {
@@ -53,7 +51,6 @@ function renderParticipants() {
         return;
     }
 
-    // Criando a tabela de participantes
     let tableHTML = "<h3>Inscritos:</h3>";
     tableHTML += `
         <table border="1">
@@ -67,7 +64,6 @@ function renderParticipants() {
             <tbody>
     `;
 
-    // Adicionando cada participante à tabela com botões de editar e excluir
     participants.forEach((p, index) => {
         tableHTML += `
             <tr>
@@ -86,8 +82,12 @@ function renderParticipants() {
         </table>
     `;
 
-    // Insere a tabela gerada no HTML
     list.innerHTML = tableHTML;
+}
+
+// Função para salvar os participantes no LocalStorage
+function saveParticipants() {
+    localStorage.setItem("participants", JSON.stringify(participants));
 }
 
 // Função para editar um participante
@@ -99,18 +99,14 @@ function editParticipant(index) {
     nameInput.value = participant.name;
     cpfInput.value = participant.cpf;
 
-    // Remove o participante atual da lista para substituí-lo
     participants.splice(index, 1);
-
-    // Atualiza a tabela
+    saveParticipants(); // Atualizar o LocalStorage
     renderParticipants();
 }
 
 // Função para excluir um participante
 function deleteParticipant(index) {
-    // Remove o participante da lista
     participants.splice(index, 1);
-
-    // Atualiza a tabela
+    saveParticipants(); // Atualizar o LocalStorage
     renderParticipants();
 }
