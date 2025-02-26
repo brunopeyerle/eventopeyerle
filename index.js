@@ -1,5 +1,5 @@
-// Array para armazenar os participantes
-let participants = [];
+// Recupera os dados armazenados no localStorage
+let participants = JSON.parse(localStorage.getItem("participants")) || [];
 
 // Função que será chamada quando o formulário for enviado
 document.getElementById("addButton").addEventListener("click", function () {
@@ -26,6 +26,9 @@ document.getElementById("addButton").addEventListener("click", function () {
 
     // Atualizando a lista na interface
     renderParticipants();
+
+    // Salvando a lista atualizada no localStorage
+    localStorage.setItem("participants", JSON.stringify(participants));
 });
 
 // Função que atualiza a tabela com os participantes
@@ -92,6 +95,9 @@ function editParticipant(index) {
 
         // Atualizando a lista de participantes
         renderParticipants();
+
+        // Salvando a lista atualizada no localStorage
+        localStorage.setItem("participants", JSON.stringify(participants));
     };
 }
 
@@ -102,4 +108,10 @@ function deleteParticipant(index) {
 
     // Atualizando a lista de participantes
     renderParticipants();
+
+    // Salvando a lista atualizada no localStorage
+    localStorage.setItem("participants", JSON.stringify(participants));
 }
+
+// Renderizando os participantes ao carregar a página
+renderParticipants();
