@@ -1,27 +1,36 @@
-/* Estilos gerais */
+/* Importando fonte moderna */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilo global */
 body {
     font-family: 'Poppins', sans-serif;
-    background: #121212;
-    color: #e0e0e0;
+    background: #0d0d0d;
+    color: #f5f5f5;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     min-height: 100vh;
-    margin: 0;
     padding: 20px;
 }
 
 /* Container principal */
 .container {
-    width: 90%;
+    width: 100%;
     max-width: 600px;
     background: #1a1a1a;
-    padding: 20px;
+    padding: 25px;
     border-radius: 12px;
-    box-shadow: 0px 4px 15px rgba(255, 0, 0, 0.4);
-    border: 1px solid #ff0000;
+    box-shadow: 0px 4px 20px rgba(255, 0, 0, 0.5);
     text-align: center;
+    border: 1px solid #ff0000;
 }
 
 /* Formulário fixo no topo */
@@ -31,35 +40,48 @@ body {
     background: #1a1a1a;
     padding: 15px;
     border-radius: 12px;
-    box-shadow: 0px 2px 8px rgba(255, 0, 0, 0.4);
+    box-shadow: 0px 2px 10px rgba(255, 0, 0, 0.5);
     width: 100%;
     text-align: center;
     z-index: 10;
 }
 
-/* Inputs */
+/* Títulos */
+h2 {
+    color: #ff0000;
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 14px;
+    color: #cccccc;
+    margin-bottom: 15px;
+}
+
+/* Inputs estilizados */
 input {
     display: block;
-    width: calc(100% - 20px);
-    margin: 10px auto;
+    width: 100%;
+    margin: 10px 0;
     padding: 12px;
     border: 1px solid #ff0000;
     border-radius: 8px;
     font-size: 16px;
     background: #2c2c2c;
-    color: #e0e0e0;
-    transition: all 0.3s ease-in-out;
+    color: #f5f5f5;
+    transition: 0.3s;
 }
 
 input:focus {
     border-color: #ff0000;
     outline: none;
-    box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.7);
+    box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.8);
 }
 
 /* Botão principal */
 button {
-    background: red;
+    background: linear-gradient(90deg, #ff0000, #b30000);
     color: white;
     border: none;
     padding: 12px;
@@ -73,21 +95,21 @@ button {
 }
 
 button:hover {
-    background: #b30000;
+    background: #cc0000;
     transform: scale(1.05);
 }
 
-/* Lista de participantes com rolagem fixa */
+/* Lista de participantes */
 .list-container {
     margin-top: 20px;
     width: 100%;
-    max-height: 350px;
+    max-height: 400px;
     overflow-y: auto;
     border-radius: 12px;
     border: 1px solid #ff0000;
     padding: 15px;
     background: #1e1e1e;
-    box-shadow: inset 0px 0px 10px rgba(255, 0, 0, 0.2);
+    box-shadow: inset 0px 0px 10px rgba(255, 0, 0, 0.3);
 }
 
 /* Estilizando a tabela */
@@ -106,9 +128,8 @@ th, td {
 }
 
 th {
-    background: red;
+    background: linear-gradient(90deg, #ff0000, #b30000);
     color: white;
-    text-align: left;
     text-transform: uppercase;
 }
 
@@ -120,28 +141,33 @@ th {
     border: none;
     font-size: 14px;
     border-radius: 6px;
-    transition: 0.3s ease-in-out;
+    transition: 0.3s;
     font-weight: bold;
 }
 
 .edit-button {
-    background-color: #ffcc00;
+    background: #ffcc00;
     color: black;
 }
 
 .edit-button:hover {
-    background-color: #d4a700;
+    background: #d4a700;
     transform: scale(1.1);
 }
 
 .delete-button {
-    background-color: #ff3b3b;
+    background: #ff3b3b;
     color: white;
 }
 
 .delete-button:hover {
-    background-color: #cc0000;
+    background: #cc0000;
     transform: scale(1.1);
+}
+
+/* Efeito de hover na tabela */
+tbody tr:hover {
+    background: rgba(255, 0, 0, 0.2);
 }
 
 /* Responsividade */
