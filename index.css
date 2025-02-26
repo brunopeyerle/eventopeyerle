@@ -1,8 +1,10 @@
 body {
     font-family: Arial, sans-serif;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    flex-direction: column;
+    height: 100vh;
     margin: 0;
     padding: 0;
 }
@@ -10,9 +12,9 @@ body {
 .container {
     width: 90%;
     max-width: 600px;
-    margin-top: 20px;
 }
 
+/* 🔥 Formulário fixo no topo */
 .form-container {
     position: sticky;
     top: 0;
@@ -20,6 +22,8 @@ body {
     padding: 15px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     z-index: 10;
+    width: 100%;
+    text-align: center;
 }
 
 input {
@@ -43,16 +47,17 @@ button:hover {
     background-color: #0056b3;
 }
 
+/* 🔥 Lista de participantes com rolagem independente */
 .list-container {
     margin-top: 20px;
     width: 100%;
-    max-width: 600px;
-    max-height: 400px; /* Tamanho fixo para evitar crescimento descontrolado */
-    overflow-y: auto; /* Permite rolagem */
+    max-height: 400px; /* 🔥 Mantém a altura fixa e rolagem */
+    overflow-y: auto;
     border: 1px solid #ccc;
     padding: 10px;
 }
 
+/* Estilizando a tabela */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -66,4 +71,23 @@ th, td {
 
 th {
     background-color: #f4f4f4;
+}
+
+/* Botões de editar e excluir */
+.action-button {
+    cursor: pointer;
+    padding: 5px;
+    margin: 2px;
+    border: none;
+    font-size: 16px;
+}
+
+.edit-button {
+    background-color: #ffc107;
+    color: black;
+}
+
+.delete-button {
+    background-color: #dc3545;
+    color: white;
 }
