@@ -1,8 +1,10 @@
 let participants = JSON.parse(localStorage.getItem("participants")) || [];
 
 document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("addButton").addEventListener("click", addParticipant);
-    renderParticipants();
+    const addButton = document.getElementById("addButton");
+    addButton.addEventListener("click", addParticipant);
+
+    renderParticipants(); // Carregar participantes ao iniciar
 });
 
 function addParticipant() {
@@ -18,44 +20,54 @@ function addParticipant() {
 
     participants.push({ name, cpf });
     participants.sort((a, b) => a.name.localeCompare(b.name));
-    localStorage.setItem("participants", JSON.stringify(participants));
 
+    saveParticipants();
     renderParticipants();
+
     nameInput.value = "";
     cpfInput.value = "";
 }
 
-function editParticipant(index) {
-    const newName = prompt("Digite o novo nome:", participants[index].name);
-    const newCpf = prompt("Digite o novo CPF:", participants[index].cpf);
+function renderParticipants() {
+    const list = document.getElementById("participantsList");
+    list.innerHTML = ""; // Limpa a tabela antes de renderizar
 
-    if (newName && newCpf) {
-        participants[index] = { name: newName.trim(), cpf: newCpf.trim() };
-        localStorage.setItem("participants", JSON.stringify(participants));
+    participants.forEach((p, index) => {
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+            <td>${p.name}</td>
+            <td>${p.cpf}</td>
+            <td>
+                <button class="action-button edit-button" onclick="editParticipant(${index})">✏️ Editar</button>
+                <button class="action-button delete-button" onclick="deleteParticipant(${index})">🗑 Excluir</button>
+            </td>
+        `;
+
+        list.appendChild(row);
+    });
+}
+
+function editParticipant(index) {
+    const newName = prompt("Novo nome:", participants[index].name);
+    const newCpf = prompt("Novo CPF:", participants[index].cpf);
+
+    if (newName !== null && newCpf !== null && newName.trim() !== "" && newCpf.trim() !== "") {
+        participants[index].name = newName.trim();
+        participants[index].cpf = newCpf.trim();
+        saveParticipants();
         renderParticipants();
     }
 }
 
 function deleteParticipant(index) {
-    if (confirm("Tem certeza que deseja remover este participante?")) {
+    if (confirm("Tem certeza que deseja excluir este participante?")) {
         participants.splice(index, 1);
-        localStorage.setItem("participants", JSON.stringify(participants));
+        saveParticipants();
         renderParticipants();
     }
 }
 
-function renderParticipants() {
-    const list = document.getElementById("participantsList");
-    list.innerHTML = participants
-        .map((p, index) => `
-            <tr>
-                <td>${p.name}</td>
-                <td>${p.cpf}</td>
-                <td>
-                    <button class="edit-button" onclick="editParticipant(${index})">✏ Editar</button>
-                    <button class="delete-button" onclick="deleteParticipant(${index})">🗑 Excluir</button>
-                </td>
-            </tr>
-        `)
-        .join("");
+function saveParticipants() {
+    localStorage.setItem("participants", JSON.stringify(participants));
 }
