@@ -4,9 +4,11 @@ let participants = [];
 document.addEventListener("DOMContentLoaded", function () {
     const storedParticipants = localStorage.getItem("participants");
     if (storedParticipants) {
-        participants = JSON.parse(storedParticipants); // Converte a string de volta para array
+        participants = JSON.parse(storedParticipants);
+    } else {
+        participants = [];
     }
-    renderParticipants(); // Renderiza a tabela com os dados salvos
+    renderParticipants();
 
     const addButton = document.getElementById("addButton");
     if (addButton) {
@@ -37,7 +39,7 @@ function addParticipant() {
     participants.push({ name, cpf });
     participants.sort((a, b) => a.name.localeCompare(b.name));
 
-    saveParticipants(); // Salvar no LocalStorage
+    saveParticipants();
     renderParticipants();
 
     nameInput.value = "";
@@ -60,7 +62,7 @@ function renderParticipants() {
 
     let tableHTML = "<h3>Inscritos:</h3>";
     tableHTML += `
-        <table border="1">
+        <table>
             <thead>
                 <tr>
                     <th>Nome</th>
@@ -77,8 +79,8 @@ function renderParticipants() {
                 <td>${p.name}</td>
                 <td>${p.cpf}</td>
                 <td>
-                    <button onclick="editParticipant(${index})">Editar</button>
-                    <button onclick="deleteParticipant(${index})">Excluir</button>
+                    <button onclick="editParticipant(${index})">✏️</button>
+                    <button onclick="deleteParticipant(${index})">❌</button>
                 </td>
             </tr>
         `;
@@ -107,13 +109,13 @@ function editParticipant(index) {
     cpfInput.value = participant.cpf;
 
     participants.splice(index, 1);
-    saveParticipants(); // Atualiza o LocalStorage
+    saveParticipants();
     renderParticipants();
 }
 
 // ❌ Excluir um participante
 function deleteParticipant(index) {
     participants.splice(index, 1);
-    saveParticipants(); // Atualiza o LocalStorage
+    saveParticipants();
     renderParticipants();
 }
