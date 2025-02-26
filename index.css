@@ -1,25 +1,34 @@
+/* Estilos gerais */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
+    background: #f4f4f9;
+    color: #333;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     height: 100vh;
     margin: 0;
-    padding: 0;
+    padding: 20px;
 }
 
+/* Container principal */
 .container {
     width: 90%;
     max-width: 600px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* 🔥 Formulário fixo no topo */
+/* Formulário fixo no topo */
 .form-container {
     position: sticky;
     top: 0;
     background: white;
     padding: 15px;
+    border-radius: 10px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     z-index: 10;
     width: 100%;
@@ -29,57 +38,79 @@ body {
 input {
     display: block;
     width: 100%;
-    margin: 5px 0;
-    padding: 8px;
+    margin: 8px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+}
+
+input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5);
 }
 
 button {
-    background-color: #007bff;
+    background: #007bff;
     color: white;
     border: none;
-    padding: 10px;
+    padding: 12px;
     cursor: pointer;
     width: 100%;
     margin-top: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: 0.3s;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background: #0056b3;
 }
 
-/* 🔥 Lista de participantes com rolagem independente */
+/* Lista de participantes com rolagem independente */
 .list-container {
     margin-top: 20px;
     width: 100%;
-    max-height: 400px; /* 🔥 Mantém a altura fixa e rolagem */
+    max-height: 400px;
     overflow-y: auto;
-    border: 1px solid #ccc;
+    border-radius: 10px;
+    border: 1px solid #ddd;
     padding: 10px;
+    background: #fff;
 }
 
 /* Estilizando a tabela */
 table {
     width: 100%;
     border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    padding: 12px;
     text-align: left;
+    font-size: 16px;
 }
 
 th {
-    background-color: #f4f4f4;
+    background: #007bff;
+    color: white;
+    text-align: left;
 }
 
-/* Botões de editar e excluir */
+/* Botões de ação */
 .action-button {
     cursor: pointer;
-    padding: 5px;
+    padding: 8px 12px;
     margin: 2px;
     border: none;
     font-size: 16px;
+    border-radius: 5px;
+    transition: 0.3s ease-in-out;
 }
 
 .edit-button {
@@ -87,7 +118,32 @@ th {
     color: black;
 }
 
+.edit-button:hover {
+    background-color: #e0a800;
+}
+
 .delete-button {
     background-color: #dc3545;
     color: white;
+}
+
+.delete-button:hover {
+    background-color: #c82333;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+    th, td {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    button {
+        font-size: 14px;
+    }
+
+    .action-button {
+        font-size: 14px;
+        padding: 6px 10px;
+    }
 }
