@@ -7,7 +7,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
     padding: 20px;
 }
@@ -16,32 +16,35 @@ body {
 .container {
     width: 90%;
     max-width: 600px;
-    background: #1e1e1e;
+    background: #1a1a1a;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(255, 0, 0, 0.3);
+    border-radius: 12px;
+    box-shadow: 0px 4px 15px rgba(255, 0, 0, 0.4);
+    border: 1px solid #ff0000;
+    text-align: center;
 }
 
 /* Formulário fixo no topo */
 .form-container {
     position: sticky;
     top: 0;
-    background: #1e1e1e;
+    background: #1a1a1a;
     padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0px 2px 5px rgba(255, 0, 0, 0.3);
-    z-index: 10;
+    border-radius: 12px;
+    box-shadow: 0px 2px 8px rgba(255, 0, 0, 0.4);
     width: 100%;
     text-align: center;
+    z-index: 10;
 }
 
+/* Inputs */
 input {
     display: block;
-    width: 100%;
-    margin: 8px 0;
-    padding: 10px;
-    border: 1px solid #555;
-    border-radius: 5px;
+    width: calc(100% - 20px);
+    margin: 10px auto;
+    padding: 12px;
+    border: 1px solid #ff0000;
+    border-radius: 8px;
     font-size: 16px;
     background: #2c2c2c;
     color: #e0e0e0;
@@ -49,11 +52,12 @@ input {
 }
 
 input:focus {
-    border-color: red;
+    border-color: #ff0000;
     outline: none;
-    box-shadow: 0px 0px 5px rgba(255, 0, 0, 0.5);
+    box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.7);
 }
 
+/* Botão principal */
 button {
     background: red;
     color: white;
@@ -61,39 +65,42 @@ button {
     padding: 12px;
     cursor: pointer;
     width: 100%;
-    margin-top: 10px;
     font-size: 16px;
-    border-radius: 5px;
+    border-radius: 8px;
     transition: 0.3s;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
 button:hover {
     background: #b30000;
+    transform: scale(1.05);
 }
 
-/* Lista de participantes com rolagem independente */
+/* Lista de participantes com rolagem fixa */
 .list-container {
     margin-top: 20px;
     width: 100%;
-    max-height: 400px;
+    max-height: 350px;
     overflow-y: auto;
-    border-radius: 10px;
-    border: 1px solid #333;
-    padding: 10px;
-    background: #2c2c2c;
+    border-radius: 12px;
+    border: 1px solid #ff0000;
+    padding: 15px;
+    background: #1e1e1e;
+    box-shadow: inset 0px 0px 10px rgba(255, 0, 0, 0.2);
 }
 
 /* Estilizando a tabela */
 table {
     width: 100%;
     border-collapse: collapse;
-    border-radius: 10px;
+    border-radius: 12px;
     overflow: hidden;
 }
 
 th, td {
     border-bottom: 1px solid #444;
-    padding: 12px;
+    padding: 14px;
     text-align: left;
     font-size: 16px;
 }
@@ -102,17 +109,19 @@ th {
     background: red;
     color: white;
     text-align: left;
+    text-transform: uppercase;
 }
 
 /* Botões de ação */
 .action-button {
     cursor: pointer;
-    padding: 8px 12px;
+    padding: 8px 14px;
     margin: 2px;
     border: none;
-    font-size: 16px;
-    border-radius: 5px;
+    font-size: 14px;
+    border-radius: 6px;
     transition: 0.3s ease-in-out;
+    font-weight: bold;
 }
 
 .edit-button {
@@ -122,6 +131,7 @@ th {
 
 .edit-button:hover {
     background-color: #d4a700;
+    transform: scale(1.1);
 }
 
 .delete-button {
@@ -131,13 +141,14 @@ th {
 
 .delete-button:hover {
     background-color: #cc0000;
+    transform: scale(1.1);
 }
 
 /* Responsividade */
 @media (max-width: 600px) {
     th, td {
         font-size: 14px;
-        padding: 8px;
+        padding: 10px;
     }
 
     button {
@@ -145,7 +156,7 @@ th {
     }
 
     .action-button {
-        font-size: 14px;
+        font-size: 12px;
         padding: 6px 10px;
     }
 }
