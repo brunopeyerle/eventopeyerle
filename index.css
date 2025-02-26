@@ -1,50 +1,69 @@
 body {
     font-family: Arial, sans-serif;
-    background: #2c2c2c;
-    color: white;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    height: 100vh;
     margin: 0;
-  }
-  
-  .container {
-    background: #3a3a3a;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    width: 400px;
-    text-align: center;
-  }
-  
-  input, button {
-    width: calc(100% - 20px);
-    margin: 10px 0;
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-  }
-  
-  input {
-    background: #4a4a4a;
-    color: white;
-    outline: none;
-  }
-  
-  button {
-    background: #ff6b6b;
-    color: white;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  
-  button:hover {
-    background: #e05a5a;
-  }
-  
-  .list {
+    padding: 0;
+}
+
+.container {
+    width: 90%;
+    max-width: 600px;
     margin-top: 20px;
+}
+
+.form-container {
+    position: sticky;
+    top: 0;
+    background: white;
+    padding: 15px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+input {
+    display: block;
+    width: 100%;
+    margin: 5px 0;
+    padding: 8px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.list-container {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 600px;
+    max-height: 400px; /* Tamanho fixo para evitar crescimento descontrolado */
+    overflow-y: auto; /* Permite rolagem */
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
     text-align: left;
-  }
+}
+
+th {
+    background-color: #f4f4f4;
+}
