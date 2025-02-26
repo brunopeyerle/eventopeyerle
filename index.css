@@ -1,39 +1,162 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscrição no Curso Peyerle</title>
-    <link rel="stylesheet" href="index.css">
-</head>
-<body>
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-    <div class="container">
-        <div class="form-container">
-            <h2>Inscrição para o Curso Peyerle</h2>
-            <p>Preencha seus dados abaixo:</p>
-            <input type="text" id="name" placeholder="Nome">
-            <input type="text" id="cpf" placeholder="CPF">
-            <button id="addButton">Inscrever-se</button>
-        </div>
-        
-        <div class="list-container">
-            <h3>Inscritos:</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>CPF</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody id="participantsList">
-                    <!-- Participantes serão inseridos aqui -->
-                </tbody>
-            </table>
-        </div>
-    </div>
+body {
+    background-color: #121212;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    padding: 20px;
+}
 
-    <script src="index.js"></script>
-</body>
-</html>
+/* Container principal */
+.container {
+    width: 100%;
+    max-width: 700px;
+    background: #1d1d1d;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+header {
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #e53935;
+    font-weight: 600;
+}
+
+p {
+    font-size: 1.2rem;
+    color: #ddd;
+}
+
+.form-container {
+    margin-bottom: 30px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 2px solid #333;
+    background: #1f1f1f;
+    color: #fff;
+    font-size: 1rem;
+}
+
+input::placeholder {
+    color: #bbb;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #e53935;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #c62828;
+}
+
+/* Lista de participantes */
+.list-container {
+    margin-top: 30px;
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #2b2b2b;
+    border-radius: 8px;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #444;
+    color: #ccc;
+}
+
+th {
+    background-color: #e53935;
+    color: white;
+}
+
+td {
+    background-color: #1f1f1f;
+}
+
+td button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.edit-button {
+    background-color: #ffeb3b;
+    color: #333;
+    transition: background-color 0.3s ease;
+}
+
+.delete-button {
+    background-color: #e53935;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.edit-button:hover {
+    background-color: #fbc02d;
+}
+
+.delete-button:hover {
+    background-color: #d32f2f;
+}
+
+/* Responsividade */
+@media screen and (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    input, button {
+        font-size: 1rem;
+    }
+
+    table th, table td {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    button {
+        font-size: 1rem;
+    }
+}
