@@ -15,6 +15,7 @@ body {
     height: 100vh;
     flex-direction: column;
     padding: 20px;
+    overflow-x: hidden;
 }
 
 /* Container principal */
@@ -28,7 +29,6 @@ body {
     text-align: center;
     display: flex;
     flex-direction: column;
-    height: 100%;
 }
 
 /* Estilo para o cabeçalho */
@@ -91,6 +91,7 @@ button:hover {
     overflow-y: auto;  /* Permite rolar a lista de participantes */
     border-radius: 8px;
     background-color: #2b2b2b;
+    padding: 10px;
 }
 
 table {
