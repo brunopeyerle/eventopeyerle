@@ -1,77 +1,105 @@
-let participants = JSON.parse(localStorage.getItem("participants")) || [];
+// Array para armazenar os participantes
+let participants = [];
 
-document.addEventListener("DOMContentLoaded", function () {
-    const addButton = document.getElementById("addButton");
-    addButton.addEventListener("click", addParticipant);
-
-    renderParticipants(); // Carregar participantes ao iniciar
-});
-
-function addParticipant() {
+// Função que será chamada quando o formulário for enviado
+document.getElementById("addButton").addEventListener("click", function () {
     const nameInput = document.getElementById("name");
     const cpfInput = document.getElementById("cpf");
+
+    // Obtendo os valores dos inputs
     const name = nameInput.value.trim();
     const cpf = cpfInput.value.trim();
 
+    // Verificando se os campos não estão vazios
     if (name === "" || cpf === "") {
-        alert("Preencha todos os campos!");
+        alert("Por favor, preencha todos os campos!");
         return;
     }
 
+    // Adicionando o novo participante ao array
     participants.push({ name, cpf });
-    participants.sort((a, b) => a.name.localeCompare(b.name));
+    participants.sort((a, b) => a.name.localeCompare(b.name)); // Ordenando pela ordem alfabética do nome
 
-    saveParticipants();
-    renderParticipants();
-
+    // Limpando os campos de entrada
     nameInput.value = "";
     cpfInput.value = "";
-}
 
+    // Atualizando a lista na interface
+    renderParticipants();
+});
+
+// Função que atualiza a tabela com os participantes
 function renderParticipants() {
     const list = document.getElementById("participantsList");
-    list.innerHTML = ""; // Limpa a tabela antes de renderizar
 
-    if (participants.length === 0) {
-        list.innerHTML = "<tr><td colspan='3'>Nenhum participante inscrito ainda.</td></tr>";
+    // Verificando se a lista existe
+    if (!list) {
+        console.error("Elemento de lista não encontrado.");
+        return;
     }
 
+    // Criando o HTML da tabela
+    let tableHTML = "";
     participants.forEach((p, index) => {
-        const row = document.createElement("tr");
-
-        row.innerHTML = `
-            <td>${p.name}</td>
-            <td>${p.cpf}</td>
-            <td>
-                <button class="edit-button" onclick="editParticipant(${index})">Editar</button>
-                <button class="delete-button" onclick="deleteParticipant(${index})">Excluir</button>
-            </td>
+        tableHTML += `
+            <tr>
+                <td>${p.name}</td>
+                <td>${p.cpf}</td>
+                <td>
+                    <button class="edit-button" onclick="editParticipant(${index})">Editar</button>
+                    <button class="delete-button" onclick="deleteParticipant(${index})">Excluir</button>
+                </td>
+            </tr>
         `;
-
-        list.appendChild(row);
     });
+
+    // Atualizando o conteúdo da lista de participantes
+    list.innerHTML = tableHTML;
 }
 
+// Função para editar um participante
 function editParticipant(index) {
-    const newName = prompt("Novo nome:", participants[index].name);
-    const newCpf = prompt("Novo CPF:", participants[index].cpf);
+    const nameInput = document.getElementById("name");
+    const cpfInput = document.getElementById("cpf");
 
-    if (newName !== null && newCpf !== null && newName.trim() !== "" && newCpf.trim() !== "") {
-        participants[index].name = newName.trim();
-        participants[index].cpf = newCpf.trim();
-        saveParticipants();
+    // Preenche os campos com os dados do participante selecionado
+    nameInput.value = participants[index].name;
+    cpfInput.value = participants[index].cpf;
+
+    // Atualiza o botão de inscrição para editar
+    document.getElementById("addButton").textContent = "Atualizar";
+
+    // Alterando a função do botão para atualizar o participante
+    document.getElementById("addButton").onclick = function () {
+        const name = nameInput.value.trim();
+        const cpf = cpfInput.value.trim();
+
+        if (name === "" || cpf === "") {
+            alert("Por favor, preencha todos os campos!");
+            return;
+        }
+
+        // Atualizando o participante no array
+        participants[index] = { name, cpf };
+        participants.sort((a, b) => a.name.localeCompare(b.name)); // Ordenando pela ordem alfabética
+
+        // Limpando os campos
+        nameInput.value = "";
+        cpfInput.value = "";
+
+        // Restaurando o texto original do botão
+        document.getElementById("addButton").textContent = "Inscrever-se";
+
+        // Atualizando a lista de participantes
         renderParticipants();
-    }
+    };
 }
 
+// Função para excluir um participante
 function deleteParticipant(index) {
-    if (confirm("Tem certeza que deseja excluir este participante?")) {
-        participants.splice(index, 1);
-        saveParticipants();
-        renderParticipants();
-    }
-}
+    // Remover o participante do array
+    participants.splice(index, 1);
 
-function saveParticipants() {
-    localStorage.setItem("participants", JSON.stringify(participants));
+    // Atualizando a lista de participantes
+    renderParticipants();
 }
