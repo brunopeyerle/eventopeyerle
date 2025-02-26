@@ -10,23 +10,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     renderParticipants();
 
-    const addButton = document.getElementById("addButton");
-    if (addButton) {
-        addButton.addEventListener("click", addParticipant);
-    } else {
-        console.error("Botão de adicionar não encontrado!");
-    }
+    document.getElementById("addButton").addEventListener("click", addParticipant);
 });
 
 // ➕ Adicionar participante
 function addParticipant() {
     const nameInput = document.getElementById("name");
     const cpfInput = document.getElementById("cpf");
-
-    if (!nameInput || !cpfInput) {
-        console.error("Os campos não foram encontrados!");
-        return;
-    }
 
     const name = nameInput.value.trim();
     const cpf = cpfInput.value.trim();
@@ -49,49 +39,27 @@ function addParticipant() {
 // 🔄 Renderizar tabela de participantes
 function renderParticipants() {
     const list = document.getElementById("participantsList");
-
-    if (!list) {
-        console.error("Elemento participantsList não encontrado!");
-        return;
-    }
+    list.innerHTML = "";
 
     if (participants.length === 0) {
-        list.innerHTML = "<p>Nenhum participante inscrito.</p>";
+        list.innerHTML = "<tr><td colspan='3' style='text-align:center;'>Nenhum participante inscrito.</td></tr>";
         return;
     }
 
-    let tableHTML = "<h3>Inscritos:</h3>";
-    tableHTML += `
-        <table>
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>CPF</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-    `;
-
     participants.forEach((p, index) => {
-        tableHTML += `
-            <tr>
-                <td>${p.name}</td>
-                <td>${p.cpf}</td>
-                <td>
-                    <button onclick="editParticipant(${index})">✏️</button>
-                    <button onclick="deleteParticipant(${index})">❌</button>
-                </td>
-            </tr>
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+            <td>${p.name}</td>
+            <td>${p.cpf}</td>
+            <td>
+                <button class="action-button edit-button" onclick="editParticipant(${index})">✏️</button>
+                <button class="action-button delete-button" onclick="deleteParticipant(${index})">❌</button>
+            </td>
         `;
+
+        list.appendChild(row);
     });
-
-    tableHTML += `
-            </tbody>
-        </table>
-    `;
-
-    list.innerHTML = tableHTML;
 }
 
 // 💾 Salvar participantes no LocalStorage
@@ -108,9 +76,7 @@ function editParticipant(index) {
     nameInput.value = participant.name;
     cpfInput.value = participant.cpf;
 
-    participants.splice(index, 1);
-    saveParticipants();
-    renderParticipants();
+    deleteParticipant(index);
 }
 
 // ❌ Excluir um participante
