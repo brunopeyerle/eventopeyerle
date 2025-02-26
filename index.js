@@ -32,6 +32,10 @@ function renderParticipants() {
     const list = document.getElementById("participantsList");
     list.innerHTML = ""; // Limpa a tabela antes de renderizar
 
+    if (participants.length === 0) {
+        list.innerHTML = "<tr><td colspan='3'>Nenhum participante inscrito ainda.</td></tr>";
+    }
+
     participants.forEach((p, index) => {
         const row = document.createElement("tr");
 
