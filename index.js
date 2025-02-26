@@ -32,6 +32,10 @@ function renderParticipants() {
     const list = document.getElementById("participantsList");
     list.innerHTML = ""; // Limpa a tabela antes de renderizar
 
+    if (participants.length === 0) {
+        list.innerHTML = "<tr><td colspan='3'>Nenhum participante inscrito ainda.</td></tr>";
+    }
+
     participants.forEach((p, index) => {
         const row = document.createElement("tr");
 
@@ -39,8 +43,8 @@ function renderParticipants() {
             <td>${p.name}</td>
             <td>${p.cpf}</td>
             <td>
-                <button class="action-button edit-button" onclick="editParticipant(${index})">✏️ Editar</button>
-                <button class="action-button delete-button" onclick="deleteParticipant(${index})">🗑 Excluir</button>
+                <button class="edit-button" onclick="editParticipant(${index})">Editar</button>
+                <button class="delete-button" onclick="deleteParticipant(${index})">Excluir</button>
             </td>
         `;
 
