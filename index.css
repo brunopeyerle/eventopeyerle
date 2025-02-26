@@ -87,8 +87,10 @@ button:hover {
 .list-container {
     margin-top: 30px;
     width: 100%;
+    max-height: 300px; /* Limita a altura da lista para que a rolagem apareça */
     overflow-y: auto;  /* Permite rolar a lista de participantes */
-    max-height: 300px; /* Limita a altura para rolar */
+    border-radius: 8px;
+    background-color: #2b2b2b;
 }
 
 table {
